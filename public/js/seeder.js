@@ -1,4 +1,4 @@
-import { db } from "../firebase-config.js";
+import { db } from "./firebase-config.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
 const JOGOS = [
@@ -10,21 +10,21 @@ const JOGOS = [
 
 const USUARIOS = [
     {
-        uid: "COLE_O_UID_DO_USUARIO_1_AQUI",
+        uid: "rjUXr8AmYcxmn0y81Bi4CAsEJdiq",
         nickname: "PlayerZero",
         bio: "Focado em FPS competitivo.",
         plataformas: ["PC"],
         jogosFavoritos: ["valorant", "csgo"]
     },
     {
-        uid: "COLE_O_UID_DO_USUARIO_2_AQUI",
+        uid: "wk6hHOFZ03XC8bAgRhGYhFqPE3V0",
         nickname: "CraftyGirl",
         bio: "Construindo mundos e relaxando.",
         plataformas: ["PC", "Nintendo Switch"],
         jogosFavoritos: ["minecraft"]
     },
     {
-        uid: "COLE_O_UID_DO_USUARIO_3_AQUI",
+        uid: "YhJc1P6bKdHgB3JmyivoExiImmU4",
         nickname: "MobaMaster",
         bio: "Apenas mais uma partida de LoL.",
         plataformas: ["PC"],

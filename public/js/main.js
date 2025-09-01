@@ -1,15 +1,15 @@
-// O caminho para o config deve voltar um nível para a raiz do projeto
-import { auth, db, storage } from "../firebase-config.js";
+// O caminho para o config agora está na mesma pasta, então usamos "./"
+import { auth, db, storage } from "./firebase-config.js";
+
+// Importa a função do seeder
+import { seedDatabase } from "./seeder.js";
 
 console.log("Aplicação iniciada com sucesso!");
 console.log("Firebase Auth:", auth);
 console.log("Firestore DB:", db);
 console.log("Firebase Storage:", storage);
 
-// O código principal da aplicação começará aqui
 // --- CÓDIGO PARA O BOTÃO DE SEEDING ---
-import { seedDatabase } from "./seeder.js";
-
 const seedButton = document.getElementById("seed-button");
 if (seedButton) {
     seedButton.addEventListener("click", () => {
