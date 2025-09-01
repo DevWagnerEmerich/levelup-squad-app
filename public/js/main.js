@@ -7,3 +7,14 @@ console.log("Firestore DB:", db);
 console.log("Firebase Storage:", storage);
 
 // O código principal da aplicação começará aqui
+// --- CÓDIGO PARA O BOTÃO DE SEEDING ---
+import { seedDatabase } from "./seeder.js";
+
+const seedButton = document.getElementById("seed-button");
+if (seedButton) {
+    seedButton.addEventListener("click", () => {
+        if (confirm("Isso irá sobrescrever os dados de teste no Firestore. Deseja continuar?")) {
+            seedDatabase();
+        }
+    });
+}
