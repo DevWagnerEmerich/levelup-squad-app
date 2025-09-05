@@ -1,5 +1,6 @@
 import { db } from "./firebase-config.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+// VERSÃO ATUALIZADA para 10.12.2 para manter a consistência
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const JOGOS = [
     { id: "valorant", nome: "Valorant", urlDaImagemCapa: "https://via.placeholder.com/150/FF5733/FFFFFF?text=Valorant" },
