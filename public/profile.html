@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    </head>
+<body>
+    <header>
+        <h1>GameHub</h1>
+        <nav>
+            </nav>
+    </header>
+
+
+    <main>
+        <section id="profile-section">
+            <h2>Meu Perfil de Jogador</h2>
+            <form id="profile-form">
+                <label for="nickname">Nickname (Apelido):</label>
+                <input type="text" id="nickname" placeholder="Seu apelido no jogo" required>
+
+
+                <label for="bio">Minha Bio:</label>
+                <textarea id="bio" placeholder="Fale um pouco sobre você, seus estilos de jogo, etc."></textarea>
+
+
+                <label>Plataformas em que você joga:</label>
+                <div class="platforms">
+                    <div>
+                        <input type="checkbox" id="platform-pc" value="PC">
+                        <label for="platform-pc">PC</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="platform-ps" value="PlayStation">
+                        <label for="platform-ps">PlayStation</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="platform-xbox" value="Xbox">
+                        <label for="platform-xbox">Xbox</label>
+                       
+                    </div>
+                    <div>
+                        <input type="checkbox" id="platform-celular" value="Celular">
+                        <label for="platform-celular">Celular</label>
+                       
+                    </div>
+                </div>
+
+
+                <button type="submit">Salvar Perfil</button>
+            </form>
+            <a href="index.html">Voltar para o início</a>
+        </section>
+    </main>
+
+
+    <footer>
+        <p>&copy; 2025 GameHub. Todos os direitos reservados.</p>
+    </footer>
+
+
+    <script type="module" src="js/profile.js"></script>
+</body>
+</html>
