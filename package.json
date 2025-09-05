@@ -1,0 +1,19 @@
+{
+  "name": "levelup-squad-app",
+  "version": "1.0.0",
+  "description": "A simple to-do list application",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server . -p 8081 -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^12.2.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
