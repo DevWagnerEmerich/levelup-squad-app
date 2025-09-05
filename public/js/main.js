@@ -144,9 +144,16 @@ logoutButton.addEventListener('click', async () => {
 
 // Adiciona o evento de clique para o botão de popular o banco
 if (seedButton) {
+<<<<<<< HEAD
     seedButton.addEventListener('click', () => {
         console.log("Botão 'Popular Banco de Dados' clicado.");
         seedDatabase();
+=======
+    seedButton.addEventListener("click", () => {
+        if (confirm("Isso irá sobrescrever os dados de teste no Firestore. Deseja continuar?")) {
+            seedDatabase(db);
+        }
+>>>>>>> a9ded7cd967c42cc738bd04cb09938029938ec7f
     });
 }
 
