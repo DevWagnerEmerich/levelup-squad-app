@@ -5,6 +5,7 @@
     --cor-superficie: #1e1e1e;
     --cor-texto-primario: #ffffff;
     --cor-texto-secundario: #b3b3b3;
+    --cor-erro: #ff4d4d;
     --fonte-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,6 +14,9 @@ body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto-primario);
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 header {
     background-color: var(--cor-superficie);
@@ -20,11 +24,107 @@ header {
     text-align: center;
     border-bottom: 2px solid var(--cor-primaria);
 }
-main { padding: 2rem; min-height: 80vh; }
+main { 
+    padding: 2rem; 
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 footer {
     text-align: center;
     padding: 1rem;
-    margin-top: 2rem;
     background-color: var(--cor-superficie);
     color: var(--cor-texto-secundario);
+}
+
+/* --- Estilos dos Formulários --- */
+#auth-container, #user-dashboard {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--cor-superficie);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--cor-primaria);
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 0.8rem;
+    border: 1px solid #333;
+    background-color: #2c2c2c;
+    color: var(--cor-texto-primario);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}
+
+button {
+    padding: 0.8rem;
+    background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--cor-texto-primario);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+form p {
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+form a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* --- Estilo para Mensagens de Erro --- */
+.error-message {
+    color: var(--cor-erro);
+    font-size: 0.9rem;
+    text-align: center;
+    min-height: 1.2em; /* Garante espaço mesmo sem erro */
+}
+
+/* --- Estilos do Painel do Usuário --- */
+#user-dashboard {
+    text-align: center;
+}
+
+#user-dashboard h2 {
+    margin-bottom: 1rem;
+}
+
+#logout-button {
+    margin-top: 1.5rem;
+    background: #555;
 }
