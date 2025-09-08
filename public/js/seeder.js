@@ -1,6 +1,6 @@
 import { db } from "./firebase-config.js";
 // VERSÃO ATUALIZADA para 10.12.2 para manter a consistência
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const JOGOS = [
     { id: "valorant", nome: "Valorant", urlDaImagemCapa: "https://via.placeholder.com/150/FF5733/FFFFFF?text=Valorant" },
@@ -33,7 +33,7 @@ const USUARIOS = [
     }
 ];
 
-export async function seedDatabase() {
+export async function seedDatabase(db) {
     console.log("Iniciando o seeding do banco de dados...");
     try {
         for (const jogo of JOGOS) {
@@ -47,7 +47,8 @@ export async function seedDatabase() {
                 console.warn(`AVISO: Preencha o UID para o usuário ${usuario.nickname} no arquivo seeder.js`);
                 continue;
             }
-            const docRef = doc(db, "users", usuario.uid);
+            const userCollection = collection(db, "users");
+            const docRef = doc(userCollection, usuario.uid);
             await setDoc(docRef, { 
                 nickname: usuario.nickname, 
                 bio: usuario.bio,

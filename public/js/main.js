@@ -14,7 +14,7 @@ const seedButton = document.getElementById("seed-button");
 if (seedButton) {
     seedButton.addEventListener("click", () => {
         if (confirm("Isso irá sobrescrever os dados de teste no Firestore. Deseja continuar?")) {
-            seedDatabase();
+            seedDatabase(db);
         }
     });
 }
