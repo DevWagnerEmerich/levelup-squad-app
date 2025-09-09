@@ -10,18 +10,51 @@
     <header>
         <h1>Level Up</h1>
         <nav>
-            </nav>
+        </nav>
     </header>
 
     <main id="app-content">
-        <h2>Bem-vindo! Encontre jogadores e monte sua equipe.</h2>
+        <!-- Seção para os formulários de autenticação -->
+        <section id="auth-container">
+            <!-- Formulário de Login -->
+            <form id="login-form">
+                <h3>Login</h3>
+                <input type="email" id="login-email" placeholder="Seu e-mail" required>
+                <input type="password" id="login-password" placeholder="Sua senha" required>
+                <!-- Elemento para exibir mensagens de erro -->
+                <p id="login-error" class="error-message"></p>
+                <button type="submit">Entrar</button>
+                <p>Não tem uma conta? <a href="#" id="show-signup">Cadastre-se</a></p>
+            </form>
+
+            <!-- Formulário de Cadastro (inicialmente escondido) -->
+            <form id="signup-form" style="display: none;">
+                <h3>Cadastro</h3>
+                <input type="email" id="signup-email" placeholder="Seu e-mail" required>
+                <!-- Adicionado minlength para validação básica do navegador -->
+                <input type="password" id="signup-password" placeholder="Crie uma senha (mín. 6 caracteres)" required minlength="6">
+                 <!-- Elemento para exibir mensagens de erro -->
+                <p id="signup-error" class="error-message"></p>
+                <button type="submit">Cadastrar</button>
+                <p>Já tem uma conta? <a href="#" id="show-login">Faça login</a></p>
+            </form>
+        </section>
+
+        <!-- Seção que aparecerá APÓS o login do usuário -->
+        <section id="user-dashboard" style="display: none;">
+            <h2>Bem-vindo, Jogador!</h2>
+            <p>Sua jornada para encontrar o squad perfeito começa agora!</p>
+            <button id="logout-button">Sair (Logout)</button>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas</p>
-        <button id="seed-button" style="margin: 20px; padding: 10px;">Popular Banco de Dados com Dados de Teste</button>
+        <!-- Botão para popular o banco de dados (ambiente de desenvolvimento) -->
+        <button id="seed-button" style="margin-top: 10px;">Popular Banco de Dados</button>
     </footer>
-
+    
+    <!-- O script principal que orquestra tudo -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
