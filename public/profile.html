@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil</title>
-    </head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
     <header>
-        <h1>GameHub</h1>
+        <h1>Level Up</h1>
         <nav>
-            </nav>
+        </nav>
     </header>
 
     <main>
@@ -35,15 +36,25 @@
                     <div>
                         <input type="checkbox" id="platform-xbox" value="Xbox">
                         <label for="platform-xbox">Xbox</label>
-                        
                     </div>
-                    <div>
+                     <div>
                         <input type="checkbox" id="platform-celular" value="Celular">
                         <label for="platform-celular">Celular</label>
-                        
                     </div>
                 </div>
 
+                <div class="menu-container">
+                    <label>Selecione seus jogos favoritos:</label>
+                    <button type="button" id="hamburger-button" class="hamburger" aria-label="Abrir menu de jogos">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <div id="games-menu" class="games-menu-content">
+                         <div id="games-checkboxes">
+                            </div>
+                    </div>
+                </div>
                 <button type="submit">Salvar Perfil</button>
             </form>
             <a href="index.html">Voltar para o início</a>
@@ -51,7 +62,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 GameHub. Todos os direitos reservados.</p>
+        <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas.</p>
     </footer>
 
     <script type="module" src="js/profile.js"></script>
