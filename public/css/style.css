@@ -24,43 +24,6 @@ header {
     text-align: center;
     border-bottom: 2px solid var(--cor-primaria);
 }
-
-/* --- Nova Barra do Usuário --- */
-#user-bar {
-    /* Garante que os itens dentro (texto e botão) fiquem em lados opostos */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 2rem; /* Espaçamento interno */
-    background-color: var(--cor-superficie); /* Mesmo fundo para dar continuidade */
-    /* A linha roxa agora fica no header, então não há borda aqui */
-}
-
-#user-bar p {
-    margin: 0;
-    color: var(--cor-texto-secundario);
-    font-size: 1.1rem;
-    font-weight: bold; /* Adicionado para deixar o texto em negrito */
-}
-
-#user-bar button {
-    background: transparent;
-    border: 1px solid var(--cor-texto-secundario);
-    color: var(--cor-texto-secundario);
-    padding: 0.5rem 1rem;
-    font-weight: normal;
-    margin: 0;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-}
-
-#user-bar button:hover {
-    background-color: var(--cor-primaria);
-    border-color: var(--cor-primaria);
-    color: var(--cor-texto-primario);
-    transform: none; /* Remove o efeito de escala anterior */
-}
-
-
 main { 
     padding: 2rem; 
     flex-grow: 1;
@@ -76,7 +39,7 @@ footer {
 }
 
 /* --- Estilos dos Formulários --- */
-#auth-container {
+#auth-container, #user-dashboard {
     width: 100%;
     max-width: 400px;
     background-color: var(--cor-superficie);
@@ -113,8 +76,7 @@ input[type="password"]:focus {
     border-color: var(--cor-primaria);
 }
 
-/* Estilo para o botão principal dos formulários */
-#auth-container button {
+button {
     padding: 0.8rem;
     background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
     color: var(--cor-texto-primario);
@@ -126,7 +88,7 @@ input[type="password"]:focus {
     transition: transform 0.2s ease;
 }
 
-#auth-container button:hover {
+button:hover {
     transform: scale(1.02);
 }
 
@@ -155,6 +117,14 @@ form a:hover {
 
 /* --- Estilos do Painel do Usuário --- */
 #user-dashboard {
-    width: 100%;
+    text-align: center;
 }
 
+#user-dashboard h2 {
+    margin-bottom: 1rem;
+}
+
+#logout-button {
+    margin-top: 1.5rem;
+    background: #555;
+}

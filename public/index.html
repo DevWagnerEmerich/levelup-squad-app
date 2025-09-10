@@ -9,13 +9,9 @@
 <body>
     <header>
         <h1>Level Up</h1>
+        <nav>
+        </nav>
     </header>
-
-    <!-- Barra de usuário que aparece após o login, abaixo da linha do header -->
-    <nav id="user-bar">
-        <p id="welcome-message" style="display: none;">Bem vindo, sua jornada para encontrar o squad perfeito começa agora!</p>
-        <button id="logout-button" style="display: none;">Sair (Logout)</button>
-    </nav>
 
     <main id="app-content">
         <!-- Seção para os formulários de autenticação -->
@@ -44,9 +40,11 @@
             </form>
         </section>
 
-        <!-- A seção do dashboard do usuário agora está vazia e servirá como container para conteúdo futuro -->
+        <!-- Seção que aparecerá APÓS o login do usuário -->
         <section id="user-dashboard" style="display: none;">
-            <!-- O conteúdo futuro do dashboard (perfis, jogos, etc.) será carregado aqui -->
+            <h2>Bem-vindo, Jogador!</h2>
+            <p>Sua jornada para encontrar o squad perfeito começa agora!</p>
+            <button id="logout-button">Sair (Logout)</button>
         </section>
     </main>
 
@@ -60,4 +58,3 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
-
