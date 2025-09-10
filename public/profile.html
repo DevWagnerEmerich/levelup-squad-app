@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil</title>
+
     </head>
 <body>
     <header>
@@ -13,12 +14,29 @@
     </header>
 
 
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Level Up</h1>
+        <nav>
+        </nav>
+    </header>
+
+
     <main>
         <section id="profile-section">
             <h2>Meu Perfil de Jogador</h2>
             <form id="profile-form">
                 <label for="nickname">Nickname (Apelido):</label>
                 <input type="text" id="nickname" placeholder="Seu apelido no jogo" required>
+
+
+
+                <label for="bio">Minha Bio:</label>
+                <textarea id="bio" placeholder="Fale um pouco sobre você, seus estilos de jogo, etc."></textarea>
+
 
 
                 <label for="bio">Minha Bio:</label>
@@ -38,6 +56,7 @@
                     <div>
                         <input type="checkbox" id="platform-xbox" value="Xbox">
                         <label for="platform-xbox">Xbox</label>
+
                        
                     </div>
                     <div>
@@ -48,11 +67,33 @@
                 </div>
 
 
+
+                    </div>
+                     <div>
+                        <input type="checkbox" id="platform-celular" value="Celular">
+                        <label for="platform-celular">Celular</label>
+                    </div>
+                </div>
+
+                <div class="menu-container">
+                    <label>Selecione seus jogos favoritos:</label>
+                    <button type="button" id="hamburger-button" class="hamburger" aria-label="Abrir menu de jogos">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <div id="games-menu" class="games-menu-content">
+                         <div id="games-checkboxes">
+                            </div>
+                    </div>
+                </div>
+
                 <button type="submit">Salvar Perfil</button>
             </form>
             <a href="index.html">Voltar para o início</a>
         </section>
     </main>
+
 
 
     <footer>
@@ -63,3 +104,12 @@
     <script type="module" src="js/profile.js"></script>
 </body>
 </html>
+
+    <footer>
+        <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas.</p>
+    </footer>
+
+    <script type="module" src="js/profile.js"></script>
+</body>
+</html>
+
