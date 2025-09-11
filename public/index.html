@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level Up - Encontre seu Squad</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <header>
@@ -17,11 +16,14 @@
     <main id="app-content">
 
 
+
         <h2>Bem-vindo! Encontr e jogadores e monte sua equipe.</h2>
          <section id="user-dashboard">
             <h2>Bem-vindo de volta!</h2>
             <a href="profile.html">Editar Meu  Perfil</a>
         </section> 
+
+
 
         <!-- Seção para os formulários de autenticação -->
         <section id="auth-container">
@@ -53,11 +55,17 @@
         <section id="user-dashboard" style="display: none;">
             <h2>Bem-vindo, Jogador!</h2>
             <p>Sua jornada para encontrar o squad perfeito começa agora!</p>
+            <a href="profile.html">Editar Perfil</a> <br>
+            <a href="search.html">Buscar Jogadores</a> <br>
             <button id="logout-button">Sair (Logout)</button>
         </section>
 
+
     </main>
    </main>
+
+    </main>
+
 
 
     <footer>
@@ -68,6 +76,5 @@
     
     <!-- O script principal que orquestra tudo -->
     <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/profile.js"></script>
 </body>
 </html>
