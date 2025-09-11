@@ -6,14 +6,7 @@ import { db } from "./firebase-config.js";
 import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-cd34e6f1cdd550766c96084c29b1f38c97db3031
 
-import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-import { collection, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
