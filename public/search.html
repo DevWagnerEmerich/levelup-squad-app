@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procurar Squad</title>
-    </head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
     <header>
-        </header>
+        <h1>Level Up</h1>
+    </header>
 
     <main>
-        <h2>Procurar Jogadores</h2>
-        <div id="search-filters">
-            <label for="game-select">Buscar jogadores pelo jogo:</label>
-            <select id="game-select">
-                <option value="">-- Carregando jogos... --</option>
-            </select>
-            <button id="search-button">Buscar</button>
-        </div>
-
-        <hr style="margin: 20px 0;">
-
-        <h3>Resultados da Busca:</h3>
-        <div id="search-results">
+        <section id="search-section">
+            <h2>Procurar Jogadores</h2>
+            <div id="search-filters">
+                <label for="game-select">Buscar jogadores pelo jogo:</label>
+                <select id="game-select">
+                    <option value="">-- Carregando jogos... --</option>
+                </select>
+                <button id="search-button">Buscar</button>
             </div>
-        
-        <br>
-        <a href="index.html">Voltar para o início</a>
+    
+            <hr>
+    
+            <h3>Resultados da Busca:</h3>
+            <div id="search-results">
+                <p>Selecione um jogo e clique em buscar para ver os resultados.</p>
+            </div>
+            
+            <a href="index.html" class="back-link">Voltar para o início</a>
+        </section>
     </main>
 
-    
-    
-        </footer>
+    <footer>
+        <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas.</p>
+    </footer>
 
     <script type="module" src="js/search.js"></script>
 </body>
