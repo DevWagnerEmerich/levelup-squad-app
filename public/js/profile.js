@@ -1,9 +1,7 @@
-// --- IMPORTAÇÕES ---
-// Importa as ferramentas necessárias do Firebase (sem duplicatas)
-import { auth, db } from './firebase-config.js';
-import { doc, setDoc, getDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { auth, db, storage } from './firebase-config.js';
+import { doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 
 // --- CAPTURA DE ELEMENTOS DO HTML ---
 const profileForm = document.getElementById('profile-form');
@@ -11,20 +9,21 @@ const nicknameInput = document.getElementById('nickname');
 const bioTextarea = document.getElementById('bio');
 const platformCheckboxes = document.querySelectorAll('input[id^="platform-"]');
 const gamesCheckboxesContainer = document.getElementById('games-checkboxes');
-const hamburgerButton = document.getElementById('hamburger-button');
-const gamesMenu = document.getElementById('games-menu');
-
+const profileImagePreview = document.getElementById('profile-image-preview');
+const profileImageInput = document.getElementById('profile-image-input');
+const uploadImageButton = document.getElementById('upload-image-button');
 
 // --- FUNÇÕES ---
 
 /**
- * Escuta por mudanças na coleção 'games' e atualiza os checkboxes em tempo real.
+ * Carrega os jogos do Firestore e cria os checkboxes.
  */
-function listenForGamesChanges() {
-    const gamesCollection = collection(db, 'games');
-
-    onSnapshot(gamesCollection, (snapshot) => {
-        gamesCheckboxesContainer.innerHTML = ''; // Limpa a lista para recriá-la
+async function loadGamesForSelection() {
+    try {
+        const gamesCollection = collection(db, 'games');
+        const snapshot = await getDocs(gamesCollection);
+        
+        gamesCheckboxesContainer.innerHTML = ''; // Limpa a lista
         snapshot.forEach(doc => {
             const game = doc.data();
             const gameId = doc.id;
@@ -43,25 +42,17 @@ function listenForGamesChanges() {
             checkboxDiv.appendChild(label);
             gamesCheckboxesContainer.appendChild(checkboxDiv);
         });
-
-        // Após criar os checkboxes de jogos, carrega os dados do perfil do usuário
-        // para marcar os que já foram salvos.
-        if (auth.currentUser) {
-            loadProfileData(auth.currentUser);
-        }
-
-    }, (error) => {
-        console.error("Erro ao ouvir as mudanças nos jogos:", error);
-        gamesCheckboxesContainer.innerHTML = '<li>Erro ao carregar jogos.</li>';
-    });
+    } catch (error) {
+        console.error("Erro ao carregar jogos:", error);
+        gamesCheckboxesContainer.innerHTML = '<p>Erro ao carregar jogos.</p>';
+    }
 }
 
 /**
- * Carrega os dados do perfil do usuário logado e preenche o formulário.
- * @param {import("firebase/auth").User} user
+ * Carrega os dados do perfil do usuário e preenche o formulário.
  */
 async function loadProfileData(user) {
-    if (!user) return; // Se não houver usuário, não faz nada
+    if (!user) return;
 
     try {
         const docRef = doc(db, 'users', user.uid);
@@ -71,95 +62,100 @@ async function loadProfileData(user) {
             const data = docSnap.data();
             nicknameInput.value = data.nickname || '';
             bioTextarea.value = data.bio || '';
+            profileImagePreview.src = data.fotoURL || 'https://via.placeholder.com/150';
 
-            // Marca as plataformas salvas
             if (data.plataformas) {
-                platformCheckboxes.forEach(checkbox => {
-                    checkbox.checked = data.plataformas.includes(checkbox.value);
+                platformCheckboxes.forEach(cb => {
+                    cb.checked = data.plataformas.includes(cb.value);
                 });
             }
-
-            // Marca os jogos favoritos salvos
             if (data.jogosFavoritos) {
                 const gameCheckboxes = gamesCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
-                gameCheckboxes.forEach(checkbox => {
-                    checkbox.checked = data.jogosFavoritos.includes(checkbox.value);
+                gameCheckboxes.forEach(cb => {
+                    cb.checked = data.jogosFavoritos.includes(cb.value);
                 });
             }
-        } else {
-            console.log("Nenhum perfil encontrado para este usuário.");
         }
     } catch (error) {
-        console.error("Erro ao carregar os dados do perfil:", error);
+        console.error("Erro ao carregar dados do perfil:", error);
     }
 }
 
-
 // --- OUVINTES DE EVENTOS (EVENT LISTENERS) ---
 
-// Controla a exibição do menu de jogos (sanduíche)
-hamburgerButton.addEventListener('click', (event) => {
-    event.stopPropagation(); // Impede que o clique se propague e feche o menu
-    gamesMenu.classList.toggle('active');
-});
-
-// Fecha o menu de jogos se o usuário clicar fora dele
-window.addEventListener('click', () => {
-    if (gamesMenu.classList.contains('active')) {
-        gamesMenu.classList.remove('active');
-    }
-});
-
-// Salva os dados do formulário no Firestore
+// Salva os dados do formulário de texto
 profileForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Impede o recarregamento da página
-
+    e.preventDefault();
     const user = auth.currentUser;
-    if (user) {
-        // Coleta as plataformas selecionadas
-        const selectedPlatforms = Array.from(platformCheckboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
+    if (!user) {
+        alert("Você precisa estar logado!");
+        return;
+    }
 
-        // Coleta os jogos selecionados
-        const selectedGames = Array.from(gamesCheckboxesContainer.querySelectorAll('input:checked'))
-            .map(checkbox => checkbox.value);
+    const selectedPlatforms = Array.from(platformCheckboxes)
+        .filter(cb => cb.checked).map(cb => cb.value);
 
-        // Monta o objeto com os dados do perfil
-        const profileData = {
-            nickname: nicknameInput.value,
-            bio: bioTextarea.value,
-            plataformas: selectedPlatforms,
-            jogosFavoritos: selectedGames
-        };
+    const selectedGames = Array.from(gamesCheckboxesContainer.querySelectorAll('input:checked'))
+        .map(cb => cb.value);
 
-        try {
-            const docRef = doc(db, 'users', user.uid);
-            await setDoc(docRef, profileData, { merge: true }); // 'merge: true' evita sobrescrever outros campos
-            alert("Perfil salvo com sucesso!");
-        } catch (error) {
-            console.error("Erro ao salvar o perfil:", error);
-            alert("Erro ao salvar o perfil. Tente novamente.");
-        }
-    } else {
-        alert("Você precisa estar logado para salvar seu perfil.");
+    const profileData = {
+        nickname: nicknameInput.value,
+        bio: bioTextarea.value,
+        plataformas: selectedPlatforms,
+        jogosFavoritos: selectedGames
+    };
+
+    try {
+        const docRef = doc(db, 'users', user.uid);
+        await setDoc(docRef, profileData, { merge: true });
+        alert("Perfil salvo com sucesso!");
+    } catch (error) {
+        console.error("Erro ao salvar perfil:", error);
+        alert("Erro ao salvar o perfil.");
     }
 });
 
+// Lógica de upload de imagem (Aluno 4)
+uploadImageButton.addEventListener('click', async () => {
+    const user = auth.currentUser;
+    const file = profileImageInput.files[0];
+
+    if (!user) {
+        alert("Você precisa estar logado para enviar uma foto.");
+        return;
+    }
+    if (!file) {
+        alert("Por favor, selecione uma imagem primeiro.");
+        return;
+    }
+
+    const storageRef = ref(storage, `profile-pictures/${user.uid}`);
+    
+    try {
+        alert("Enviando imagem...");
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+
+        const userDocRef = doc(db, 'users', user.uid);
+        await setDoc(userDocRef, { fotoURL: downloadURL }, { merge: true });
+
+        profileImagePreview.src = downloadURL;
+        alert("Foto de perfil atualizada com sucesso!");
+    } catch (error) {
+        console.error("Erro no upload da imagem:", error);
+        alert("Ocorreu um erro ao enviar a imagem.");
+    }
+});
 
 // --- INICIALIZAÇÃO ---
 
-// Inicia o monitoramento dos jogos no banco de dados
-listenForGamesChanges();
-
-// Verifica o estado de autenticação do usuário para carregar os dados
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
-        // A função loadProfileData já é chamada dentro de listenForGamesChanges,
-        // mas podemos chamar aqui também para garantir que os outros campos (nick, bio) carreguem rápido.
-        loadProfileData(user);
+        await loadGamesForSelection(); // Carrega os jogos
+        await loadProfileData(user);   // Em seguida, carrega o perfil (para marcar os checkboxes)
     } else {
-        console.log("Nenhum usuário logado. Formulário desabilitado.");
-        // Opcional: você pode limpar o formulário ou desabilitar os campos aqui
+        // Redireciona para a página de login se não estiver logado
+        alert("Você precisa estar logado para ver seu perfil.");
+        window.location.href = 'index.html';
     }
 });
