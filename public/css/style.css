@@ -8,7 +8,13 @@
     --cor-erro: #ff4d4d;
     --fonte-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--fonte-principal);
     background-color: var(--cor-fundo);
@@ -18,19 +24,23 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 header {
     background-color: var(--cor-superficie);
     padding: 1rem 2rem;
     text-align: center;
     border-bottom: 2px solid var(--cor-primaria);
 }
-main { 
-    padding: 2rem; 
+
+main {
+    padding: 2rem;
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
+
 footer {
     text-align: center;
     padding: 1rem;
@@ -38,10 +48,9 @@ footer {
     color: var(--cor-texto-secundario);
 }
 
-/* --- Estilos dos Formulários --- */
-#auth-container, #user-dashboard {
+section {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     background-color: var(--cor-superficie);
     padding: 2rem;
     border-radius: 8px;
@@ -54,29 +63,37 @@ form {
     gap: 1rem;
 }
 
-form h3 {
+form h3, section h2 {
     text-align: center;
     margin-bottom: 1rem;
     color: var(--cor-primaria);
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"],
+textarea,
+select {
     padding: 0.8rem;
     border: 1px solid #333;
     background-color: #2c2c2c;
     color: var(--cor-texto-primario);
     border-radius: 4px;
     font-size: 1rem;
+    width: 100%;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--cor-primaria);
 }
 
-button {
+button, a.button-link {
     padding: 0.8rem;
     background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
     color: var(--cor-texto-primario);
@@ -86,6 +103,8 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease;
+    text-align: center;
+    text-decoration: none;
 }
 
 button:hover {
@@ -107,99 +126,142 @@ form a:hover {
     text-decoration: underline;
 }
 
-/* --- Estilo para Mensagens de Erro --- */
 .error-message {
     color: var(--cor-erro);
     font-size: 0.9rem;
     text-align: center;
-    min-height: 1.2em; /* Garante espaço mesmo sem erro */
+    min-height: 1.2em;
 }
 
-/* --- Estilos do Painel do Usuário --- */
 #user-dashboard {
     text-align: center;
 }
 
-#user-dashboard h2 {
-    margin-bottom: 1rem;
+.dashboard-links {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dashboard-links a {
+    color: var(--cor-secundaria);
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #logout-button {
     margin-top: 1.5rem;
     background: #555;
 }
-<<<<<<< HEAD
 
-/* --- Estilos do Menu Sanduíche de Jogos --- */
+/* --- Estilos da Página de Perfil --- */
+#profile-section label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
 
-.menu-container {
-    margin-top: 1.5rem;
+.profile-picture-container {
+    text-align: center;
     margin-bottom: 1rem;
-    position: relative; /* Essencial para o posicionamento do menu dropdown */
 }
 
-.menu-container label {
+#profile-image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cor-primaria);
+    margin-bottom: 1rem;
+}
+
+input[type="file"] {
     display: block;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem auto;
 }
 
-/* Estilo do botão sanduíche */
-.hamburger {
-    background: none;
-    border: 1px solid var(--cor-secundaria);
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-flex;
-    flex-direction: column;
-    gap: 4px; /* Espaço entre as linhas */
-    vertical-align: middle;
-    transition: background-color 0.2s ease;
+.checkbox-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.checkbox-group div {
+    display: flex;
+    align-items: center;
 }
 
-.hamburger:hover {
-    background-color: #333;
-}
-
-.hamburger-line {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: var(--cor-texto-primario);
-}
-
-/* Conteúdo do menu (lista de checkboxes) */
-.games-menu-content {
-    display: none; /* Escondido por padrão */
-    position: absolute;
-    background-color: #2c2c2c;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-top: 0.5rem;
-    z-index: 10; /* Garante que o menu apareça sobre outros elementos */
-    max-height: 250px; /* Altura máxima com barra de rolagem */
-    overflow-y: auto; /* Adiciona rolagem se a lista for longa */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Classe 'active' que será adicionada/removida pelo JavaScript para mostrar/esconder o menu */
-.games-menu-content.active {
-    display: block;
-}
-
-/* Estilo para os checkboxes dentro do menu */
 #games-checkboxes div {
     padding: 0.3rem 0;
     display: flex;
     align-items: center;
 }
-
 #games-checkboxes label {
-    margin-left: 0.8rem;
-    color: var(--cor-texto-primario);
-    cursor: pointer;
+    margin: 0 0 0 0.5rem;
 }
 
-=======
->>>>>>> 538d840f48aba9985d3b28aeb3f4c3d1ee082ac4
+.games-menu-content {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--cor-secundaria);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 1.5rem 0;
+}
+
+/* --- Estilos da Página de Busca --- */
+#search-filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#search-results {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #2c2c2c;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--cor-secundaria);
+}
+
+.player-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.player-card h4 {
+    margin-bottom: 0.25rem;
+    color: var(--cor-texto-primario);
+}
+
+.player-card p {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+}
