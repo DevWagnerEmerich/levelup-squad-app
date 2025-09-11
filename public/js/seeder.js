@@ -1,7 +1,9 @@
 import { db } from "./firebase-config.js";
 // VERSÃO ATUALIZADA para 10.12.2 para manter a consistência
+
 import { collection, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 // Adicionamos 'export' para que a lista de jogos possa ser importada em outros arquivos
 export const JOGOS = [
