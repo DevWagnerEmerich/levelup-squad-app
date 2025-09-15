@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil</title>
-
-    </head>
-<body>
-    <header>
-        <h1>GameHub</h1>
-        <nav>
-            </nav>
-    </header>
-
-
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <h1>Level Up</h1>
-        <nav>
-        </nav>
     </header>
-
 
     <main>
         <section id="profile-section">
             <h2>Meu Perfil de Jogador</h2>
             <form id="profile-form">
+
+                <label for="nickname">Nickname (Apelido):</label>
+                <input type="text" id="nickname" placeholder="Seu apelido no jogo" required>
+
+
+
+                
+                <!-- Seção de Upload de Imagem (Aluno 4) -->
+                <div class="profile-picture-container">
+                    <img id="profile-image-preview" src="https://via.placeholder.com/150" alt="Foto do Perfil">
+                    <label for="profile-image-input">Escolha uma nova foto:</label>
+                    <input type="file" id="profile-image-input" accept="image/*">
+                    <button type="button" id="upload-image-button">Enviar Nova Foto</button>
+                </div>
+
+                <hr>
+
+                <!-- Campos de Texto -->
                 <label for="nickname">Nickname (Apelido):</label>
                 <input type="text" id="nickname" placeholder="Seu apelido no jogo" required>
 
@@ -36,9 +40,9 @@
                 <label for="bio">Minha Bio:</label>
                 <textarea id="bio" placeholder="Fale um pouco sobre você, seus estilos de jogo, etc."></textarea>
 
-
+                <!-- Checkboxes de Plataformas -->
                 <label>Plataformas em que você joga:</label>
-                <div class="platforms">
+                <div class="checkbox-group">
                     <div>
                         <input type="checkbox" id="platform-pc" value="PC">
                         <label for="platform-pc">PC</label>
@@ -48,47 +52,39 @@
                         <label for="platform-ps">PlayStation</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="platform-xbox" value="Xbox">
-                        <label for="platform-xbox">Xbox</label>
-
-                       
+                        <input type="checkbox" id="platform-mobile" value="mobile">
+                        <label for="platform-xbox">Xmobile</label>
                     </div>
                     <div>
+
                         <input type="checkbox" id="platform-celular" value="Celular">
                         <label for="platform-celular">Celular</label>
                        
                     </div>
                 </div>
 
+
+                        <input type="checkbox" id="platform-xbox" value="Xbox">
+                        <label for="platform-xbox">Xbox</label>
+                    </div>
+                </div>
+
+                <!-- Menu de Jogos (Aluno 3 e 2) -->
+
                 <div class="menu-container">
                     <label>Selecione seus jogos favoritos:</label>
-                    <button type="button" id="hamburger-button" class="hamburger" aria-label="Abrir menu de jogos">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                    </button>
                     <div id="games-menu" class="games-menu-content">
                          <div id="games-checkboxes">
-                            </div>
+                            <p>Carregando jogos...</p>
+                         </div>
                     </div>
                 </div>
 
                 <button type="submit">Salvar Perfil</button>
             </form>
-            <a href="index.html">Voltar para o início</a>
+            <a href="index.html" class="back-link">Voltar para o início</a>
         </section>
     </main>
-
-
-
-    <footer>
-        <p>&copy; 2025 GameHub. Todos os direitos reservados.</p>
-    </footer>
-
-
-    <script type="module" src="js/profile.js"></script>
-</body>
-</html>
 
     <footer>
         <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas.</p>
@@ -97,4 +93,3 @@
     <script type="module" src="js/profile.js"></script>
 </body>
 </html>
-
