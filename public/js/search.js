@@ -3,6 +3,8 @@
 // Importe as Ferramentas do Firebase
 import { auth, db, storage } from './firebase-config.js';
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// Importa a função para enviar pedido de amizade
+import { sendFriendRequest } from './friends.js';
 
 // --- ELEMENTOS DO DOM ---
 const gameSelect = document.getElementById('game-select');
@@ -70,19 +72,31 @@ async function searchPlayers() {
         } else {
             querySnapshot.forEach(doc => {
                 const userData = doc.data();
-                
+                const userId = doc.id; // ID do usuário encontrado
+
                 // Cria elementos HTML dinamicamente (um "card" para o jogador)
                 const playerCard = document.createElement('div');
                 playerCard.className = 'player-card'; // Adicione uma classe para estilização (CSS)
-                
+
                 const nicknameElement = document.createElement('h4');
                 nicknameElement.textContent = userData.nickname;
-                
+
                 const bioElement = document.createElement('p');
                 bioElement.textContent = userData.bio;
 
+                // Cria o botão "Adicionar Amigo"
+                const addFriendButton = document.createElement('button');
+                addFriendButton.textContent = 'Adicionar Amigo';
+                addFriendButton.dataset.userId = userId; // Armazena o ID do jogador no botão
+
+                // Adiciona o evento de clique ao botão
+                addFriendButton.addEventListener('click', () => {
+                    sendFriendRequest(userId);
+                });
+
                 playerCard.appendChild(nicknameElement);
                 playerCard.appendChild(bioElement);
+                playerCard.appendChild(addFriendButton); // Adiciona o botão ao card
 
                 // Adiciona o card na área de resultados
                 searchResultsContainer.appendChild(playerCard);
@@ -102,5 +116,3 @@ searchButton.addEventListener('click', searchPlayers);
 
 // Chama a função para carregar os jogos assim que a página carregar
 document.addEventListener('DOMContentLoaded', loadGames);
-
-// CORREÇÃO: A chave '}' extra no final do arquivo foi removida.

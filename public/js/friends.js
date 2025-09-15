@@ -1,6 +1,7 @@
 // Importando Firebase
 import { auth, db } from './firebase-config.js';
-import { collection, addDoc } from 'firebase/firestore';
+// CORREÇÃO: Usando a URL completa para a importação do Firestore
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // Função para enviar pedido de amizade
 export async function sendFriendRequest(userIdDoAmigo) {
